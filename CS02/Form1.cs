@@ -68,17 +68,33 @@ namespace CS02
             foreach (string w in _split)
             {                
                 string[] word = w.Split('=');
-                if (word.Length > 0)
+                if (word.Length >= 2)
                 {
+
+                    string key = word[0];
+                    string value = word[1];
+                    if (key.Trim().Equals("mode"))
+                    {
+                        value = word[1];
+                        if (value.Trim().Equals("ok"))
+                        {
+                            MessageBox.Show("FOUND");
+                        }
+                    }
+
+                    Console.WriteLine("Result KEY: {0}", key);
+                    Console.WriteLine("Result VALUE: {0}", value);
+
+                    /*
                     foreach (string s in word)
                     {
-                        if (s.Trim().Equals("mode"))
+                        if (s.Trim().Equals("mode")) // check mode value
                         {
                             Console.WriteLine("FOUND");
                         }
                         Console.WriteLine("Result: {0}", s);
                     }
-                    Console.WriteLine("\n");
+                    */
                 }                
             }
         }
