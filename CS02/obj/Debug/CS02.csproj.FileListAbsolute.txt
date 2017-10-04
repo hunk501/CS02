@@ -1,7 +1,6 @@
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\bin\Debug\CS02.exe.config
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\bin\Debug\CS02.exe
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\bin\Debug\CS02.pdb
-c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\obj\Debug\CS02.csprojResolveAssemblyReference.cache
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\obj\Debug\CS02.Form1.resources
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\obj\Debug\CS02.Properties.Resources.resources
 c:\users\dennis lira\documents\visual studio 2012\Projects\CS02\CS02\obj\Debug\CS02.csproj.GenerateResource.Cache

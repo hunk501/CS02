@@ -29,6 +29,8 @@ namespace CS02
             timer1.Enabled = true;
             timer1.Start();
             Console.WriteLine("Timer is Called");
+
+            addAutoStartUp();
         }
 
         private void readData()
@@ -126,14 +128,16 @@ namespace CS02
             {
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
                 {
-                    key.SetValue("CS03 Auto Startup", "\"" + Application.ExecutablePath + "\"");
+                    key.SetValue("CS02 Auto Startup", "\"" + Application.ExecutablePath + "\"");
                 }
 
-                MessageBox.Show("Success", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Console.WriteLine("Auto start created");
+                //MessageBox.Show("Success", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error:" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error:" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine("Error: "+ e.Message);
             }
         }
 
@@ -232,7 +236,9 @@ namespace CS02
             Console.WriteLine("Timer Started");
             // 3600000
             //readData();   
-            
+
+            addAutoStartUp();
+
             // Start background Worker
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.WorkerReportsProgress = true;
