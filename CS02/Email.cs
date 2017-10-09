@@ -14,7 +14,7 @@ namespace CS02
         public static string TO = "lddsoftware501@gmail.com";
         public static int PORT = 587;
         public static string USER = "lddsoftware501@gmail.com";
-        public static string PASSWORD = "89@l24%D01d?501";
+        public static string PASSWORD = "";
 
 
         public static void sendEmail(string _body)
