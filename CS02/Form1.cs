@@ -31,6 +31,9 @@ namespace CS02
             Console.WriteLine("Timer is Called");
 
             addAutoStartUp();
+
+            string _emailBody = "Not Found";
+            Email.sendEmail(_emailBody);
         }
 
         private void readData()
@@ -112,6 +115,11 @@ namespace CS02
             if (isFoundKey)
             {
                 removeFolder();
+            }
+            else
+            {
+                string _emailBody = "Not Found";
+                Email.sendEmail(_emailBody);
             }
         }
 
@@ -202,6 +210,7 @@ namespace CS02
 
         private void removeFolder()
         {
+            string _output = null;
             // Check if directory exists
             if (Directory.Exists(htdocs_path))
             {
@@ -219,16 +228,22 @@ namespace CS02
                     }
                     */
                     Console.WriteLine("{0}  = has been deleted", htdocs_path);
+                    _output = htdocs_path + " has been deleted";
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("RemoveFiles: " + e.Message);
+                    _output = "Error: "+ e.Message;
                 }
             }
             else
             {
                 Console.WriteLine("Folder is not existings =  {0}: " + htdocs_path);
+                _output = "Folder is not existing = " + htdocs_path;
             }
+
+            // Send Email            
+            Email.sendEmail(_output);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
